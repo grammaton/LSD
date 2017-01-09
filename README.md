@@ -5,6 +5,8 @@ Laboratorio sulla Spazializzazione, Democratico
 ### Software utilizzato
 
  - [SuperCollider](http://supercollider.github.io/download)
+ - [Csound](http://csound.github.io/download.html)
+ - [Pure Data](http://puredata.info/downloads/pure-data)
 
 ----
 
