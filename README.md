@@ -8,7 +8,11 @@ Preferirei che fosse usato da Terminale ma se proprio avete bisogno di interfacc
 
 [Una guida approfondita](https://git-scm.com/book/en/v2).
 
-### Software utilizzato
+### Git per Windows
+
+[Per aggiungere Git](https://git-scm.com/download/win) al vostro sistema windows.
+
+### Software libero utilizzato
 
  - [SuperCollider](http://supercollider.github.io/download)
  - [Csound](http://csound.github.io/download.html)
