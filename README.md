@@ -4,6 +4,10 @@ Laboratorio sulla Spazializzazione, Democratico
 
 Git, strumento necessario. [Una breve introduzione](https://try.github.io/levels/1/challenges/1).
 
+Preferirei che fosse usato da Terminale ma se proprio avete bisogno di interfaccia, [Git ha la sua](https://desktop.github.com)
+
+[Una guida approfondita](https://git-scm.com/book/en/v2).
+
 ### Software utilizzato
 
  - [SuperCollider](http://supercollider.github.io/download)
