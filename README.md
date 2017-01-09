@@ -2,7 +2,7 @@
 
 Laboratorio sulla Spazializzazione, Democratico
 
-GitHub, Gitter… tutto necessario
+Git, strumento necessario. [Una breve introduzione](https://try.github.io/levels/1/challenges/1).
 
 ### Software utilizzato
 
