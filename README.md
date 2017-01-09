@@ -2,6 +2,8 @@
 
 Laboratorio sulla Spazializzazione, Democratico
 
+GitHub, Gitter… tutto necessario
+
 ### Software utilizzato
 
  - [SuperCollider](http://supercollider.github.io/download)
