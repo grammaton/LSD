@@ -11,6 +11,7 @@ Preferirei che fosse usato da Terminale ma se proprio avete bisogno di interfacc
 ### Git per Windows
 
 [Per aggiungere Git](https://git-scm.com/download/win) al vostro sistema windows.
+[Git for windows](https://git-for-windows.github.io) software suite.
 
 ### Software libero utilizzato
 
