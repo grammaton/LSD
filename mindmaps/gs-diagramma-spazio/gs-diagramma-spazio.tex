@@ -11,27 +11,20 @@
 \begin{document}
 
 \begin{tikzpicture}
-	\path[mindmap,concept color=gray,text=white]
+	\path[mindmap,concept color=black,text=white]
 	node[concept] {SPAZIO}
 	[clockwise from=120]
-		child[concept color=blue] {
+		child[concept color=purple] {
 		node[concept] (cre) {CREATIVO}
 		[clockwise from=230]
-	    child {
-	    	node[concept] (amb) {Ambiente}
+	    child { node[concept] (amb) {Ambiente}
 		    [clockwise from=300]
-			child {
-			node[concept] {Super Collider} }
-			child {
-				node[concept] {Faust} }
-			child {
-				node[concept] {Csound} }
-			child {
-				node[concept] {Max} }	
-			child {
-				node[concept] {?} }		
-			child {
-				node[concept] {DAW} }		
+			child { node[concept] {Super Collider} }
+			child {	node[concept] {Faust} }
+			child {	node[concept] {Csound} }
+			child {	node[concept] {Max} }	
+			child {	node[concept] {?} }		
+			child {	node[concept] {DAW} }		
 		}
 		child { node[concept] (aut) {Modello} }	
 		child { node[concept] (aut) {Notazione} }				
@@ -48,8 +41,7 @@
 		}
 		child { node[concept] (int)  {Interno}
 			[clockwise from=60]
-			child {
-				node[concept] (perc) {Percez.}
+			child {	node[concept] (perc) {Percez.}
 				[clockwise from=120]
 				child { node[concept] (tim) {Timbro } }
 				child { node[concept] (dir) {Direz.} }
@@ -58,8 +50,7 @@
 			child { node[concept] (spet) {Spettro} }
 			child { node[concept] (prc) {Processo} }
 		}
-		child {
-			node[concept] (est) {Esterno}
+		child {	node[concept] (est) {Esterno}
 		    [clockwise from=30]
 		    child { node [concept] (ogg) {oggetto acustico}
 			    [clockwise from=90]
@@ -69,9 +60,8 @@
 			child { node [concept] (amb) {ambiente} }			
 		}
     }
-	child[concept color=red] {
-    	node[concept] (vis) {VISIVO}
-	};
+	child[concept color=red] { node[concept] (vis) {VISIVO} }
+	child[concept color=red] { node[concept] (vis) {TATTILE} };
 %	\draw[thick] (node cs:name=son) -- (node cs:name=asc);
 %	\draw[thick] (node cs:name=asc) -- (node cs:name=cre);
 %	\draw[thick] (node cs:name=est) -- (node cs:name=asc);
