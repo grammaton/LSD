@@ -25,6 +25,7 @@ Preferirei che fosse usato da Terminale ma se proprio avete bisogno di interfacc
 ### Le parole sono importanti
 
  - [Stereo](https://en.wikipedia.org/wiki/Stereophonic_sound)
+ - [Amplitude](https://en.wikipedia.org/wiki/Amplitude)
 
 ----
 
