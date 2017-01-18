@@ -1,0 +1,62 @@
+#N canvas 434 188 889 604 10;
+#X obj 9 10 cnv 15 870 30 empty empty BinauralAudio 8 15 0 20 -128992
+-262144 0;
+#X obj 449 51 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 344 356 450 222 EXTERNALS 0;
+#X text 22 44 needed externals: earplug~ \, iemlib and iemgui;
+#X restore 139 571 pd EXTERNALS;
+#X obj 558 155 testsig~;
+#X obj 9 51 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 535 477 stereo-out~;
+#X text 13 118 With a stereo headphone we can reproduce most of the
+cues \, which are responsible for 3d localization.;
+#X text 12 161 The most prominent cues are:;
+#X text 28 180 - interaural level and time differencs (ILD and ITD)
+;
+#X text 28 197 - pinna-head-torso system acts like a direction-dependend
+filter;
+#X text 28 225 - listener is never static in real live \, therefore
+small movements help in localization;
+#X text 16 340 A fundamental limitation comes from the fact \, that
+HRTFs vary widely between different subjects \, so that front-back
+reversals are fairly common.;
+#X text 16 394 The quality of localization can be dramatically improved
+using individualized HRTFs and head-motion tracking \, to model also
+small head movements.;
+#X text 14 82 Binaural means \, that we try to reproduce 3 dimensional
+audio with stereo headphones.;
+#X text 14 51 Binaural Cues and HRTFs;
+#X obj 536 217 binaural~;
+#X obj 536 404 stereo-rev~;
+#X obj 9 451 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 14 451 Externalization;
+#X text 14 523 In natural situations \, the signals are significantly
+decorrelated \, especially because of room reverberation.;
+#X text 453 81 This following example utilizes HRTF measurements (compact
+set) of KEMAR Dummy-Head Microphone (http://sound.media.mit.edu/KEMAR.html).
+;
+#X text 458 535 The earplug~ external was implemented by Pei Xiang.
+;
+#X text 454 51 KEMAR HRTFs example;
+#X text 650 413 <- try reverberation;
+#X text 672 429 (but a very simple reverb);
+#X text 16 272 The first two cues above can be measured \, then we
+get the so called Head-Related Transfer Functions (HRTFs). A popular
+collection of measurements were taken using a KEMAR dummy head (and
+they are freely available).;
+#X text 15 478 Binaural sound material often causes internalization
+of the sound sources in the head of the listener \, therefore the sound
+should be decorrelated.;
+#X connect 6 0 18 0;
+#X connect 18 0 19 0;
+#X connect 18 1 19 1;
+#X connect 19 0 8 0;
+#X connect 19 1 8 1;

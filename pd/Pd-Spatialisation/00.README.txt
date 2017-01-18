@@ -1,0 +1,80 @@
+
+STEREO, MULTICHANNEL AND BINAURAL SOUND SPATIALIZATION
+in Pure-Data
+
+2007, Georg Holzmann
+grh _at_ mur _dot_ at
+
+
+
+----------------------------------------------------------------------------
+1. ABSTRACT
+
+The goal of this workshop is to show how to position sound in space (stereo,
+multichannel and binaural). This should be done from a user point of view,
+without explaining the detailed mathematic behind the algorithms.
+Therefore existing and open-source implementations in Pure-Data will be used
+and explained.
+
+Topics:
+- stereo-panning methods
+- vector based amplitude panning (VBAP)
+- ambisonic
+- binaural ambisonic and 3D room simulation
+
+
+----------------------------------------------------------------------------
+2. INSTALLATION
+
+Additionally to these workshop files you will need Pure Data and various
+externals (see 4).
+There are various methods to get them, I will explain here now how to get it
+working with Pd-extended:
+
+  - go to http://autobuild.puredata.info/ and download the latest binary of
+    Pd-Extended for your platform (> 0.40 !)
+    (these are very experimental daily builds - so if you have problems try
+     an other version, but it must not be older than 2007-03-20 !)
+  - follow the installer
+  - start pd with: "pd -lib libdir" (this will load the new library loader)
+  - now everything should work out of the box !
+    (if not, write a mail to the pd-list or me)
+
+
+----------------------------------------------------------------------------
+3. USAGE
+
+Step through the files, that start with a number:
+
+  01.Introduction.pd
+  02.ILDandITD.pd
+  03.StereoPanning.pd
+  04.HeadShadowAndITD.pd
+  05.BinauralAudio.pd
+  06.VBAP.pd
+  07.Ambisonic.pd
+  08.MoreAmbisonic.pd
+  09.BinauralAmbisonicAndRoomsim.pd
+  10.REFERENCE.txt
+
+All the other files are some useful abstractions or other helper functions.
+
+
+----------------------------------------------------------------------------
+4. NEEDED EXTERNALS
+
+The following externals are needed (already included in Pd-Extended):
+
+  iemlib
+  zexy
+  iemgui
+  iem_ambi
+  iem_bin_ambi
+  iemmatrix
+  iem_matrix
+  iem_spec2
+  iem_tab
+  iem_delay
+  iem_roomsim
+  vbap
+  earplug~

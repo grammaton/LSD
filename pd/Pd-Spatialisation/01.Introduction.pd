@@ -1,0 +1,62 @@
+#N canvas 435 308 891 610 10;
+#X obj 9 10 cnv 15 870 30 empty empty Introduction 8 15 0 20 -128992
+-262144 0;
+#X obj 10 312 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 448 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 15 312 General Notes;
+#X text 453 55 Sound Localization;
+#X text 452 87 Sound localization is the ability to identify the location
+of a sound in a 3 dimensional (virtual) space.;
+#X text 27 508 For any more questions don't hesitate to contact me:
+;
+#X obj 10 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 15 55 Abstract;
+#X text 14 189 Topics:;
+#X text 28 209 - general introduction;
+#X text 28 223 - stereo-panning methods;
+#X text 28 237 - vector based amplitude panning (VBAP);
+#X text 28 251 - ambisonic;
+#X text 28 265 - binaural ambisonic and 3D room simulation;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 0 0 450 300 EXTERNALS 0;
+#X text 26 27 no externals used for this one;
+#X text 26 57 only dummy;
+#X restore 125 571 pd EXTERNALS;
+#X text 14 83 The goal of this tutorial/workshop is to show how to
+position sound in space (stereo \, multichannel and binaural).;
+#X text 15 465 Enjoy :) !;
+#X text 14 116 This will be explained from a user point of view \,
+without using too detailed mathematics:) - therefore existing and open-source
+implementations in Pure-Data will be used and explained !;
+#X text 452 148 How do we detect the location of a sound ?;
+#X text 451 251 These two cues will aid us in localizing the sound
+source's azimuth (left-right \, not height).;
+#X text 451 351 These influences can be summarized as the "head-related
+transfer function" (HRTF) \, which is unique for each human being.
+;
+#X text 452 184 Because of our two ears \, the sound will be delayed
+on the far ear \, this is called "interaural time difference" (ITD).
+;
+#X text 451 216 Also the loudness of the sound will be damped at the
+far ear \, which is called "interaural level difference" (ILD).;
+#X text 450 305 The detection of the sound source elevation mostly
+depends on filtering effects of external structures: the head \, shoulders
+\, torso and the outer ear (= pinna).;
+#X text 102 530 Georg Holzmann \, grh _at_ mur.at;
+#X text 451 417 Distance cues are not that easy to detect. Head-related
+filtering \, the sound amplitude and echos from structures in the environment
+are the most important factors to estimate the sound distance. Also
+small movements of the head are important.;
+#X text 12 345 This tutorial requires Pure Data with various external.
+See the file 00.README.txt for more information.;
+#X text 13 385 The used externals of the current patch are always listed
+in the subpatch [pd EXTERNALS].;
+#X text 14 424 The References of this patches and more theoretical
+information can be found in 10.REFERENCE.txt.;

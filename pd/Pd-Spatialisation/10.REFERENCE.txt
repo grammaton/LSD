@@ -1,0 +1,68 @@
+
+REFERENCE
+
+These are the main References used for this tutorial, which should
+give you more detailed information about the used algorithmsand etc.
+Some of them the are in german, but you should also find all theory
+in the english once.
+
+
+books:
+
+- DAFX, Digital Audio Effects
+  (edited by Udo Zölzer)
+  mainly chapter 6: Spatial Effects
+
+- Periphonic Sound Spatialization in Multi-User Virtual Environments
+  (Florian Hollerweger)
+  detailed description of localization, stereo, VBAP, Ambisonic and
+  Higher Order Ambisonic
+  http://iem.at/projekte/acoustic/awt/periphonic/periphonic.pdf
+
+- Introduction to Sound Processing
+  (Davide Rocchesso)
+  chapter 3.6: Spatial sound processing
+  http://profs.sci.univr.it/~rocchess/SP/sp.pdf
+
+- The Theory and Technique of Electronic Music
+  (Miller Puckette)
+  only for some Pd-related implementation issues
+  http://crca.ucsd.edu/~msp/techniques.htm
+
+
+papers:
+
+- Uniform Spreading of Amplitude Panned Virtual Sources
+  (Ville Pulkki)
+  detailed description of VBAP and MDAP (Multiple Direction 
+  Amplitude Panning)
+  http://lib.tkk.fi/Diss/2001/isbn9512255324/article3.pdf
+
+- IEM Report 38/07:
+  Binaural-Ambisonic 4.Ordnung 3D-Raumsimulationsmodell mit
+  ortsvarianten Quellen und Hörerin bzw. Hörer für PD
+  (Thomas Musil, Alois Sontacchi, Markus Noisternig, Robert Höldrich)
+  detailed description of Binaural Ambisonic and Room-Simulation
+  http://iem.at/projekte/publications/iem_report/report38_07/report38_07
+  GERMAN ONLY !
+
+- Mehrkanalwiedergabetechniken
+  (Michael Strauß)
+  good introduction into Holophonie, Ambisonic, Wellenfeldsynthese
+  and VBAP
+  http://iem.kug.ac.at/~sontacchi/beschallung/Ambisonic_WFS_VBAP.pdf
+  GERMAN ONLY !
+
+- Implementation kopfpositionsbezogener Binauraltechnik
+  (Markus Noisternig, Piotr Majdak)
+  chapter 4: Ambisonic and Binaural Theory
+  http://iem.at/projekte/acoustic/awt/majdak_noisternig/implementation
+  GERMAN ONLY !
+
+
+wikipedia:
+
+- in various topics there are some interesting articles in wikipedia,
+  so it's worth to check
+  (for the german speakers: there are also some really extensive explanations
+   in german !)

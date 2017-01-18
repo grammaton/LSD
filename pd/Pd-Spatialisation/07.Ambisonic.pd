@@ -1,0 +1,112 @@
+#N canvas 479 320 889 610 10;
+#X obj 9 10 cnv 15 870 30 empty empty Ambisonic 8 15 0 20 -128992 -262144
+0;
+#X obj 448 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 322 522 450 156 EXTERNALS 0;
+#X obj 37 42 import iemgui;
+#X text 22 90 needed externals: iemgui \, iemlib \, iem_ambi \, iemmatrix
+;
+#X restore 139 571 pd EXTERNALS;
+#X obj 584 177 testsig~;
+#X obj 539 477 quadrophon-out~;
+#X obj 8 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 11 83 The idea behind ambisonic is \, to reproduce the entire
+soundfield rather than the creation of isolated phantom sound sources
+(like with VBAP).;
+#X obj 224 222 iem_image data/ambi.gif 0 0 empty empty;
+#X text 12 157 The 3D B Format can be recorded with four signals: W
+\, X \, Y and Z (and the 2D case we don't need Z !).;
+#X text 29 242 W = sqrt(2)/2 * s;
+#X text 13 187 W is a signal as taken from an omni-directional mic
+\, and X \, Y \, and Z are signals as taken from figure-of-eight mics
+aligned with the orthogonal axes:;
+#X text 29 306 phi ... azimuth;
+#X text 29 256 X = cos(phi)cos(theta) * s;
+#X text 29 270 Y = sin(phi)cos(theta) * s;
+#X text 29 284 Z = sin(theta) * s;
+#X text 28 321 theta ... elevation;
+#X text 11 139 First Order Ambisonic Encoding: B Format;
+#X text 29 333 s ... unencoded mono signal;
+#X text 12 374 Ambisonic Decoding:;
+#X text 13 55 Ambisonic Introduction;
+#X text 12 533 Ideally \, the loudspeakers should form a regular layout
+!;
+#X text 12 394 The decoding depends on the loudspeaker layout. Each
+loudspeaker receives a weighted sum of all channels \, depending on
+its own position.;
+#X text 12 440 The number of loudspeakers must be at least the number
+of ambisonic channels \, which can be calculated:;
+#X text 34 476 2D-case: nr = 2m + 1;
+#X text 34 490 3D-case: nr = (m + 1)^2;
+#X text 36 509 m ... ambisonic order;
+#X obj 525 235 b-format-encoder~;
+#X obj 485 191 sig~;
+#X floatatom 483 171 5 0 0 0 - - -;
+#N canvas 0 0 450 300 debug-signal~ 0;
+#X obj 16 22 inlet~;
+#X obj 16 150 snapshot~;
+#X obj 16 176 outlet;
+#X obj 106 22 inlet~;
+#X obj 106 150 snapshot~;
+#X obj 106 176 outlet;
+#X obj 195 22 inlet~;
+#X obj 195 150 snapshot~;
+#X obj 195 176 outlet;
+#X obj 279 22 inlet~;
+#X obj 279 150 snapshot~;
+#X obj 279 176 outlet;
+#X obj 63 102 metro 300;
+#X obj 63 52 loadbang;
+#X msg 62 79 1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 1 0;
+#X connect 12 0 4 0;
+#X connect 12 0 7 0;
+#X connect 12 0 10 0;
+#X connect 13 0 14 0;
+#X connect 14 0 12 0;
+#X restore 688 426 pd debug-signal~;
+#X floatatom 688 448 4 0 0 0 - - -;
+#X floatatom 723 448 4 0 0 0 - - -;
+#X floatatom 759 448 4 0 0 0 - - -;
+#X floatatom 795 448 4 0 0 0 - - -;
+#X obj 516 409 ambi-4ch-2D-decoder~;
+#X text 453 55 First Order Ambisonic Example;
+#X text 454 527 The ambisonic externals for PD \, which we will use
+in the following examples \, were made by Thomas Musil at IEM Graz.
+;
+#X text 451 87 Here we have a B-Format Ambisonic Encoder and an 2D
+\, first order Ambisonic Decoder (therefore we don't need the Z-signal
+of the Encoder). The output of the Decoder will be mapped to 4 loudspeakers.
+;
+#X connect 29 0 37 0;
+#X connect 29 0 32 0;
+#X connect 29 1 37 1;
+#X connect 29 1 32 1;
+#X connect 29 2 37 2;
+#X connect 29 2 32 2;
+#X connect 29 3 32 3;
+#X connect 30 0 29 0;
+#X connect 31 0 30 0;
+#X connect 32 0 33 0;
+#X connect 32 1 34 0;
+#X connect 32 2 35 0;
+#X connect 32 3 36 0;
+#X connect 37 0 7 0;
+#X connect 37 1 7 1;
+#X connect 37 2 7 2;
+#X connect 37 3 7 3;

@@ -1,0 +1,99 @@
+#N canvas 410 0 889 610 10;
+#X obj 9 10 cnv 15 870 30 empty empty VectorBaseAmplitudePanning 8
+15 0 20 -128992 -262144 0;
+#X obj 448 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 344 356 450 182 EXTERNALS 0;
+#X text 22 30 needed externals: vbap_ext \, iemgui \, iemlib \, iemmatrix
+;
+#X restore 139 571 pd EXTERNALS;
+#X obj 507 151 testsig~;
+#X text 12 93 The approach used for stereo panning can be generalized
+to an arbitrary number of loudspeakers \, which is called VBAP (Vector
+Base Amplitude Panning).;
+#X text 13 166 The general principle of VBAP are the following:;
+#X text 14 220 - If the virtual sound source is located on a line connecting
+2 loudspeakers \, only those 2 loudspeakers have nonzero gain (pair-wise
+panning);
+#X text 14 187 - If the virtual sound source is located at a loudspeaker
+postion \, only that loudspeaker has nonzero gain;
+#X text 11 266 - If the virtual sound source is located on a triangle
+between 3 loudspeakers \, only those 3 loudspeakers have nonzero gain
+(triple-wise panning);
+#X obj 492 97 vbap-main;
+#X obj 518 239 vbap-4ch~;
+#X obj 552 457 quadrophon-out~;
+#X text 453 55 VBAP Implementation by Ville Pulkki;
+#X obj 8 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 13 55 VBAP Theory;
+#X text 563 98 <- define loudspeaker setup here;
+#X text 12 380 NOTE: this formulation of VBAP is consisten with low
+frequencies (up to 700 Hz - Velocity Model). The technique for higher
+frequencies is called Vector Base Intensity Panning (VBIP - Energy
+Model).;
+#X obj 666 217 rvbap-4ch~;
+#X text 465 508 rvbap generates additional commands for controlling
+a reverberated signal to be able to control the radial distance of
+a sound.;
+#X text 12 320 This ensures the maximum sharpness in sound source location!
+;
+#X text 12 457 In the following implementation of Pulkki is an additional
+spread-parameter \, which can be used to prevent a situation where
+sound is coming from one speaker only which would make the speaker
+"visible". This is known as Multiple Direction Amplitude Panning (MDAP)
+and also removes some other artifacts (e.g. virtual sources close to
+a loudspeaker tend to collapse).;
+#N canvas 0 0 450 300 debug-signal~ 0;
+#X obj 16 22 inlet~;
+#X obj 16 150 snapshot~;
+#X obj 16 176 outlet;
+#X obj 106 22 inlet~;
+#X obj 106 150 snapshot~;
+#X obj 106 176 outlet;
+#X obj 195 22 inlet~;
+#X obj 195 150 snapshot~;
+#X obj 195 176 outlet;
+#X obj 279 22 inlet~;
+#X obj 279 150 snapshot~;
+#X obj 279 176 outlet;
+#X obj 63 102 metro 300;
+#X obj 63 52 loadbang;
+#X msg 62 79 1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 1 0;
+#X connect 12 0 4 0;
+#X connect 12 0 7 0;
+#X connect 12 0 10 0;
+#X connect 13 0 14 0;
+#X connect 14 0 12 0;
+#X restore 738 432 pd debug-signal~;
+#X floatatom 738 454 4 0 0 0 - - -;
+#X floatatom 773 454 4 0 0 0 - - -;
+#X floatatom 809 454 4 0 0 0 - - -;
+#X floatatom 845 454 4 0 0 0 - - -;
+#X connect 6 0 13 0;
+#X connect 13 0 14 0;
+#X connect 13 1 14 1;
+#X connect 13 2 14 2;
+#X connect 13 3 14 3;
+#X connect 20 0 14 0;
+#X connect 20 1 14 1;
+#X connect 20 2 14 2;
+#X connect 20 3 14 3;
+#X connect 24 0 25 0;
+#X connect 24 1 26 0;
+#X connect 24 2 27 0;
+#X connect 24 3 28 0;

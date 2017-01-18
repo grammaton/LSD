@@ -1,0 +1,111 @@
+#N canvas 187 100 889 604 10;
+#X obj 9 10 cnv 15 870 30 empty empty AmbisonicContinued 8 15 0 20
+-128992 -262144 0;
+#X obj 449 51 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 276 525 450 138 EXTERNALS 0;
+#X text 25 34 the following externals are needed: iemgui \, iemlib
+\, iem_ambi \, iemmatrix;
+#X restore 139 571 pd EXTERNALS;
+#X obj 582 187 testsig~;
+#X obj 9 51 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 483 201 sig~;
+#X floatatom 481 181 5 0 0 0 - - -;
+#N canvas 0 0 450 300 debug-signal~ 0;
+#X obj 16 22 inlet~;
+#X obj 16 150 snapshot~;
+#X obj 16 176 outlet;
+#X obj 106 22 inlet~;
+#X obj 106 150 snapshot~;
+#X obj 106 176 outlet;
+#X obj 195 22 inlet~;
+#X obj 195 150 snapshot~;
+#X obj 195 176 outlet;
+#X obj 279 22 inlet~;
+#X obj 279 150 snapshot~;
+#X obj 279 176 outlet;
+#X obj 63 102 metro 300;
+#X obj 63 52 loadbang;
+#X msg 62 79 1;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 1 0;
+#X connect 12 0 4 0;
+#X connect 12 0 7 0;
+#X connect 12 0 10 0;
+#X connect 13 0 14 0;
+#X connect 14 0 12 0;
+#X restore 691 461 pd debug-signal~;
+#X floatatom 691 483 4 0 0 0 - - -;
+#X floatatom 726 483 4 0 0 0 - - -;
+#X floatatom 762 483 4 0 0 0 - - -;
+#X floatatom 798 483 4 0 0 0 - - -;
+#X text 21 113 - loudspeaker layout do not have to be known at encoding
+time;
+#X text 22 141 - ambisonic encoding format is a powerful representation
+of 3D soundfield \, which allows easy manipulations (e.g. rotation
+\, mirroring \, zooming \, ...);
+#X text 27 355 - better localization quality;
+#X text 27 371 - bigger sweet spot area;
+#X obj 8 250 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 13 250 Higher Order Ambisonic;
+#X text 14 51 Ambisonic Advantages/Disadvantages;
+#X text 14 79 The separation of the encoding and decoding is a major
+advantage:;
+#X text 12 193 Disadvantage:;
+#X text 23 211 - sweet spot is small \, therefore Higher Order Ambisonic
+can be used;
+#X text 14 274 Higher Order Ambisonics (HOA) are based on the decomposition
+of a soundfield into a series of spherical harmonic functions: like
+W \, X \, Y \, Z ind the B-Format \, but more.;
+#X text 13 337 This leads to several advantages:;
+#X text 454 51 Second Order Ambisonic Example;
+#X obj 523 245 ambi2nd-encoder~;
+#X obj 502 455 ambi2nd-decoder~;
+#X obj 503 483 octophon-out~;
+#X text 27 387 - extended upper frequency border of accurate soundfield
+reproduction;
+#X text 14 424 But therefore a higher number of encoded channels and
+required loudspeakers are needed! HOA can also be used for binaural
+reproduction \, then the loudspeakers are no restriction anymore.;
+#X text 14 485 One problem with HOA is \, that it is not easy to record
+higher order spherical harmonics \, because there are no microphones
+with the needed characteristic (microphone arrays would be possible)
+- but it is of course possible to simply encode a mono signal with
+the computer.;
+#X text 458 81 NOTE: you will also get the W \, X \, Y and Z signals
+from this second order encoder (like in the previous example) - so
+higher order ambisonic signals are compatible with lower order (and
+vice versa) !;
+#X connect 8 0 28 0;
+#X connect 9 0 8 0;
+#X connect 10 0 11 0;
+#X connect 10 1 12 0;
+#X connect 10 2 13 0;
+#X connect 10 3 14 0;
+#X connect 28 0 29 0;
+#X connect 28 0 10 0;
+#X connect 28 1 29 1;
+#X connect 28 1 10 1;
+#X connect 28 2 29 2;
+#X connect 28 2 10 2;
+#X connect 28 3 29 3;
+#X connect 28 3 10 3;
+#X connect 28 4 29 4;
+#X connect 28 5 29 5;
+#X connect 28 6 29 6;
+#X connect 28 7 29 7;
+#X connect 28 8 29 8;

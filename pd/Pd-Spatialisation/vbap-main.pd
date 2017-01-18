@@ -1,0 +1,24 @@
+#N canvas 116 96 862 288 10;
+#X text 62 114 Define VBAP loudspeaker setup:;
+#X text 416 229 In two dimensions \, only specify the azimuth. (for
+example "define_loudspeakers 2 -45 45 0 180";
+#X text 416 135 Use define_loudspeakers to list the speaker positions.
+The example here defines loudspeakers in three dimensions (the first
+parameter). For each speaker \, define its azimuth and elevation. Here
+we have speakers front left and right with no elevation (-45 0 45 0)
+and front and back with 45 degrees of elevation (0 45 180 45). Send
+the data to vbap.;
+#X obj 57 196 s VBAP_SPEAKER_SETUP;
+#X text 10 18 VBAP MAIN:;
+#X text 112 18 this abstraction is needed to define your VBAP setup
+!;
+#X obj 29 71 inlet RESET;
+#X obj 57 139 bng 25 250 50 0 empty empty empty 17 7 0 10 -260818 -1
+-1;
+#X obj 715 21 import vbap_ext;
+#X obj 57 171 define_loudspeakers 3 -45 0 45 0 0 45 180 45;
+#X obj 140 73 loadbang;
+#X connect 6 0 7 0;
+#X connect 7 0 9 0;
+#X connect 9 0 3 0;
+#X connect 10 0 7 0;

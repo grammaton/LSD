@@ -1,0 +1,57 @@
+#N canvas 459 312 889 610 10;
+#X obj 9 10 cnv 15 870 30 empty empty HeadShadowAndITD 8 15 0 20 -128992
+-262144 0;
+#X obj 448 205 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 344 356 450 300 EXTERNALS 0;
+#X text 26 38 needed externals: iemlib;
+#X restore 139 571 pd EXTERNALS;
+#X obj 638 245 testsig~;
+#X obj 575 500 stereo-out~;
+#X text 11 185 The ITD can be obtained by means of a first-order allpass
+filter \, whose group delay is a function of the azimuth angle.;
+#X text 11 242 So we have a frequency-depending head shadowing effect
+\, and frequency-depending Interaural Time Differences (because of
+the allpass) !;
+#X text 11 62 If we want to encode our mono source not only by adjusting
+the relative amplitudes of the channels \, we can try to model the
+headshadow effect and the Interaural Time Differences (ITD) between
+the two ears.;
+#X text 12 128 Our head diffracts a plane wave. This shadowing effect
+can be effectively approximated by a first-order stabel IIR filter.
+;
+#X obj 10 311 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 15 311 Head Shadowing IIR Filter;
+#X text 46 397 H = -------------------------------------;
+#X text 104 408 (w0 + fs) + (w0 - fs) z^-1;
+#X text 76 387 (w0 + alfa*fs) + (w0 - alfa*fs) z^-1;
+#X text 77 456 w0 = c / a ... (a = radius of the head);
+#X text 76 471 alfa(theta) = 1.05 + 0.95cos(theta*180/150);
+#X text 76 485 fs = samplerate;
+#X text 17 524 This IIR filter can be implemeted with the pd objects
+[rpole~] and [rzero~].;
+#X obj 448 54 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 453 54 ITD allpass filter;
+#X text 451 83 The ITDs can be modelled with an allpass filter where
+the group delay is the following function of theta:;
+#X text 473 140 tao =;
+#X text 453 205 HeadShadow and ITD Implementation;
+#X text 45 438 where:;
+#X obj 538 340 pan-advanced~;
+#X text 521 130 -fs/w0 cos(theta) ... if 0 < abs(theta) < 90;
+#X text 527 148 fs/w0 (abs(theta)-90) ... if abs(theta) > 90;
+#X obj 696 357 panner~;
+#X text 15 337 Our Head-Shadowing-Filter \, depending on the azimuth
+theta \, looks like this:;
+#X connect 6 0 27 0;
+#X connect 27 0 7 0;
+#X connect 27 1 7 1;
+#X connect 30 0 7 0;
+#X connect 30 1 7 1;

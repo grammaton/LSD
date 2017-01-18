@@ -1,0 +1,65 @@
+#N canvas 223 0 889 604 10;
+#X obj 9 10 cnv 15 870 30 empty empty BinauralAmbisonic_RoomSimulation
+8 15 0 20 -128992 -262144 0;
+#X obj 449 51 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 608 662 450 150 EXTERNALS 0;
+#X text 14 27 needed externals: iemlib \, iemgui \, zexy \, iem_ambi
+\, iem_bin_ambi \, iemmatrix \, iem_spec2 \, iem_tab \, iem_matrix
+\, iem_delay \, iem_roomsim;
+#X text 16 85 Also the file in the directory ./binambi_abs are needed
+!;
+#X restore 139 571 pd EXTERNALS;
+#X obj 570 245 testsig~;
+#X obj 9 51 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 569 417 stereo-out~;
+#X obj 559 324 binambi-roomsim~;
+#X text 20 341 In this simulation the room is a cube \, where you can
+adjust various parameters: room length \, room width \, room height
+\, somic speed \, wall absorption coefficient for 3 frequency bands
+\, air absorption cutoff frequency and a distance exponent (see ROOM-SETTINGS
+in the GUI).;
+#X text 20 420 Now it's possible to rotate the ambisonic encoded signals
+\, which corresponds to head rotations that have quite some influence
+on our perception (can be used e.g. with head-tracking).;
+#X text 18 486 The last module is the binaural ambisonic decoder \,
+that converts the ambisonic signals to binaural stereo signals (with
+KEMAR HRTFs in that example).;
+#X text 14 51 Binaural Higher Order Ambisonic;
+#X text 14 149 In the following example there is also a room simulator
+that models eraly reflections and diffuse reverb.;
+#X obj 9 223 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X text 14 223 How does it work ?;
+#X text 20 260 The input signal of each source is encoded in 4th order
+3D ambisonic. Therefore the direct sound \, the first and second early
+reflections and the diffuse reverb are calculated by the room simulator
+and ambisonic encoded (see REVERBERATION-BALANCE in the GUI of [binambi-roomsim~]).
+;
+#X text 454 51 How to use the GUI ?;
+#X text 453 77 The number "1" is the first source (left input of binambi-rommsim~)
+\, number "2" the second.;
+#X text 453 109 You can move a source in the room as you like - strg
+(or alt) and dragging changes the height of the source (z coordinate).
+;
+#X text 453 153 The circle corresponds to our head. You can also move
+it in the room and shift dragging rotates the head \, strg (or alt)
+dragging changes the height of it.;
+#X text 453 493 Credits to Thomas Musil \, who build most of the externals
+and patches !;
+#X text 453 523 A more complemte version (more HRTFs \, ...) can be
+downloaded here: http://iem.at/~musil/Binaural_Ambisonic/;
+#X text 14 85 If you don't have that many loudspeakers to play back
+higher order ambisonic encoded signal \, you can try to render them
+to binaural signals and then listen to it with headphones.;
+#X obj 688 247 testsig~;
+#X connect 6 0 9 0;
+#X connect 9 0 8 0;
+#X connect 9 1 8 1;
+#X connect 25 0 9 1;

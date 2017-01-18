@@ -1,0 +1,149 @@
+#N canvas 499 96 891 610 10;
+#X obj 9 10 cnv 15 870 30 empty empty ILDandITD 8 15 0 20 -128992 -262144
+0;
+#X obj 448 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 10 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#X text 15 55 Interaural Level Difference - ILD;
+#X text 453 55 Interaural Time Difference - ITD;
+#X text 13 90 ILDs are caused by:;
+#X text 14 108 - attenuation of sounds on the far ear by the human
+head;
+#X text 14 123 - sound amplitude decreasewith the sound source distance
+;
+#X text 452 89 ITDs are caused because of the distance between the
+two ears.;
+#N canvas 574 124 450 300 EXTERNALS 0;
+#X text 36 37 used eternals: iemlib;
+#X restore 126 571 pd EXTERNALS;
+#X obj 548 407 stereo-out~;
+#X obj 477 219 testsig~;
+#X floatatom 599 344 5 0 0 1 ms - -;
+#N canvas 46 646 528 262 delay_channels 0;
+#X obj 18 29 inlet~ signal;
+#X obj 194 29 inlet del-left;
+#X obj 376 29 inlet del-right;
+#X obj 194 157 sig~;
+#X obj 376 157 sig~;
+#X obj 144 213 outlet~;
+#X obj 245 215 outlet~;
+#N canvas 0 0 450 212 delay-writer 0;
+#X obj 22 27 inlet~;
+#X obj 52 87 delwrite~ \$0-delline1 2000;
+#X obj 116 113 delwrite~ \$0-delline2 2000;
+#X obj 22 159 outlet~;
+#X connect 0 0 1 0;
+#X connect 0 0 2 0;
+#X connect 0 0 3 0;
+#X restore 144 77 pd delay-writer;
+#N canvas 0 0 450 300 delay-reader 0;
+#X obj 146 173 vd~ \$0-delline1;
+#X obj 328 173 vd~ \$0-delline2;
+#X obj 146 199 outlet~;
+#X obj 327 199 outlet~;
+#X obj 146 147 inlet~;
+#X obj 328 147 inlet~;
+#X obj 35 39 inlet~;
+#X text 34 61 dummy;
+#X text 34 75 (to force execution order !);
+#X connect 0 0 2 0;
+#X connect 1 0 3 0;
+#X connect 4 0 0 0;
+#X connect 5 0 1 0;
+#X restore 144 185 pd delay-reader;
+#X text 153 116 <- needed for right execution order !;
+#X connect 0 0 7 0;
+#X connect 1 0 3 0;
+#X connect 2 0 4 0;
+#X connect 3 0 8 1;
+#X connect 4 0 8 2;
+#X connect 7 0 8 0;
+#X connect 8 0 5 0;
+#X connect 8 1 6 0;
+#X restore 542 378 pd delay_channels;
+#X floatatom 671 364 5 0 0 1 ms - -;
+#X obj 156 439 stereo-out~;
+#X floatatom 209 389 5 -100 20 1 dB - -;
+#X floatatom 280 390 5 -100 20 1 dB - -;
+#N canvas 350 626 528 280 attenuate_channels 0;
+#X obj 18 29 inlet~ signal;
+#X obj 178 233 outlet~;
+#X obj 361 233 outlet~;
+#X obj 194 127 dbtorms;
+#X obj 194 105 + 100;
+#X obj 194 29 inlet dB-left;
+#X obj 376 29 inlet dB-right;
+#X msg 194 150 \$1 50;
+#X obj 194 173 line~;
+#X obj 376 128 dbtorms;
+#X obj 376 106 + 100;
+#X msg 376 151 \$1 50;
+#X obj 376 174 line~;
+#X obj 177 201 *~;
+#X obj 361 203 *~;
+#X obj 277 59 loadbang;
+#X msg 277 79 0;
+#X connect 0 0 13 0;
+#X connect 0 0 14 0;
+#X connect 3 0 7 0;
+#X connect 4 0 3 0;
+#X connect 5 0 4 0;
+#X connect 6 0 10 0;
+#X connect 7 0 8 0;
+#X connect 8 0 13 1;
+#X connect 9 0 11 0;
+#X connect 10 0 9 0;
+#X connect 11 0 12 0;
+#X connect 12 0 14 1;
+#X connect 13 0 1 0;
+#X connect 14 0 2 0;
+#X connect 15 0 16 0;
+#X connect 16 0 4 0;
+#X connect 16 0 10 0;
+#X restore 138 408 pd attenuate_channels;
+#X text 12 151 But ILDs are most relevant for frequencies above 1.5
+kHz \, because diffraction occurs for wavelengths large compared to
+the size of the human head.;
+#X obj 602 321 hsl 128 15 0 4 0 0 empty empty empty -2 -8 0 10 -233017
+-1 -1 0 1;
+#X obj 674 343 hsl 128 15 0 4 0 0 empty empty empty -2 -8 0 10 -233017
+-1 -1 0 1;
+#X obj 280 304 vsl 15 80 -20 0 0 0 empty empty empty 0 -9 0 10 -233017
+-1 -1 7900 1;
+#X text 719 343 right;
+#X text 645 321 left;
+#X obj 209 303 vsl 15 80 -20 0 0 0 empty empty empty 0 -9 0 10 -233017
+-1 -1 7900 1;
+#X text 203 285 left;
+#X text 271 285 right;
+#X text 13 495 One advantage: with ILDs there are no phase-differences
+and therefore the signal is mono-compatible (it's called intensity
+stereophony).;
+#X text 451 468 ITD is problematic for playback with loudspeakers \,
+because it heavily depends on the head position of the listener - therefore
+mostly intensity stereophonyis used for loudspeakers.;
+#X text 451 123 They are relevant for frequencies below 1.5 kHz since
+the phase differences become ambiguous for signals with smaller wavelengths
+(when the wavelengths are smaller then the head \, the ear cannot detect
+a phase relation between the two signals).;
+#X text 451 525 The technique which uses ITDs is also called time-of-arrival
+stereophony.;
+#X connect 14 0 16 0;
+#X connect 15 0 16 1;
+#X connect 16 0 13 0;
+#X connect 16 1 13 1;
+#X connect 17 0 16 2;
+#X connect 19 0 21 1;
+#X connect 20 0 21 2;
+#X connect 21 0 18 0;
+#X connect 21 1 18 1;
+#X connect 23 0 15 0;
+#X connect 24 0 17 0;
+#X connect 25 0 20 0;
+#X connect 28 0 19 0;

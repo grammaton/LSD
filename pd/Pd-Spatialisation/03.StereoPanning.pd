@@ -1,0 +1,80 @@
+#N canvas 313 88 891 610 10;
+#X obj 9 10 cnv 15 870 30 empty empty StereoPanning 8 15 0 20 -128992
+-262144 0;
+#X obj 448 55 cnv 15 430 15 empty empty empty 20 12 0 14 -179884 -66577
+0;
+#X obj 9 564 cnv 15 870 30 empty empty 2007_GeorgHolzmann 715 15 0
+12 -99865 -262144 0;
+#X obj 13 568 cnv 15 260 22 empty empty empty 20 12 0 14 -262144 -66577
+0;
+#X text 16 571 see also:;
+#N canvas 344 356 450 300 EXTERNALS 0;
+#X obj 31 36 import iemgui;
+#X text 32 85 needed externals: iemgui and iemlib;
+#X restore 139 571 pd EXTERNALS;
+#X text 11 54 Usually we can change to position of a mono sound-source
+just by feeding the channels with the same signal and adjusting the
+relative amplitudes of the channel.;
+#X obj 56 216 iem_image data/stereo.gif 0 0 empty empty;
+#X text 11 101 The curve of level differences \, needed for a specific
+angle \, is well approximated by the Blumlein Law:;
+#X text 14 455 But the Blumlein Law is only valid for lower frequencies
+(< 600Hz) and when the listeners head is pointing directly forward.
+;
+#X text 15 501 Therefore the tangent law is also correct for slight
+rotations of the listener's head:;
+#X text 28 163 g_L \, g_R ... gains for the channels;
+#X text 28 180 phi ... angle of the virtual sound source;
+#X text 11 140 sin(phi) = (g_L - g_R)/(g_L + g_R) * sin(phi_0);
+#X text 15 535 tan(phi) = (g_L - g_R)/(g_L + g_R) * tan(phi_0);
+#X text 28 196 phi_0 ... angle formed by the loudspeaker;
+#X text 453 55 Stereo Panner Implementation;
+#X text 449 83 To implement the tangent law \, we need one more equation:
+in the central position \, both signals should be -3dB.;
+#X text 478 143 g_L = sqrt(2)/2 * (cos(phi) + sin(phi));
+#X text 478 159 g_R = sqrt(2)/2 * (cos(phi) - sin(phi));
+#X obj 575 290 testsig~;
+#X obj 629 497 stereo-out~;
+#X text 448 193 These equations preserves the loudness of the virtual
+sound source while moving its position. In contrast \, linear cross-fading
+between the two channels does not preserve the loudness and determines
+a "hole in the middle" of the stereo front.;
+#X obj 534 400 panner~ 250;
+#X text 448 115 For phi_0 = 45 degree \, we get the following results:
+;
+#N canvas 232 586 351 265 linear-panning~ 0;
+#X obj 25 35 inlet~;
+#X obj 169 35 inlet pan;
+#X obj 26 178 *~;
+#X obj 55 178 line~;
+#X obj 153 180 *~;
+#X obj 182 180 line~;
+#X obj 169 61 clip 0 1;
+#X obj 55 129 expr abs($f1-1);
+#X obj 25 205 outlet~ L;
+#X obj 154 205 outlet~ R;
+#X msg 55 155 \$1 250;
+#X msg 182 157 \$1 250;
+#X connect 0 0 2 0;
+#X connect 0 0 4 0;
+#X connect 1 0 6 0;
+#X connect 2 0 8 0;
+#X connect 3 0 2 1;
+#X connect 4 0 9 0;
+#X connect 5 0 4 1;
+#X connect 6 0 7 0;
+#X connect 6 0 11 0;
+#X connect 7 0 10 0;
+#X connect 10 0 3 0;
+#X connect 11 0 5 0;
+#X restore 726 403 pd linear-panning~;
+#X obj 777 390 hsl 75 12 0 1 0 0 empty empty empty -2 -8 0 10 -260818
+-1 -1 7400 1;
+#X text 749 354 for comparison:;
+#X text 741 370 (-6dB in middle);
+#X connect 20 0 23 0;
+#X connect 23 0 21 0;
+#X connect 23 1 21 1;
+#X connect 25 0 21 0;
+#X connect 25 1 21 1;
+#X connect 26 0 25 1;
