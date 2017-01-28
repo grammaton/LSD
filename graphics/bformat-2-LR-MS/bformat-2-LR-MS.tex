@@ -1,0 +1,125 @@
+\documentclass[tikz,11pt,border=10pt]{standalone}
+%\documentclass[a4paper]{article}
+
+\usepackage{tikz}
+\usetikzlibrary{mindmap}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\begin{document}
+
+\begin{tikzpicture} [
+    auto,
+    mic/.style = {
+    	font=\scriptsize\sffamily,
+		circle,
+		draw=black,
+    	thick,
+    	%fill=blue!20,
+    	text width=2em,
+    	text badly centered,
+    	inner sep=1pt,
+	},
+    block/.style    = {
+    	font=\scriptsize\sffamily, 
+    	rectangle,
+		draw=black,
+		thick,
+		%fill=black!10,
+		text width=6em,
+		text centered,
+		%rounded corners, 
+		minimum height=2em
+		},
+	line/.style = { 
+    	draw,
+		thick,
+		fill=black
+		%shorten >=2pt
+		},
+	control/.style = { 
+    	draw,
+		circle,
+		thick,
+		fill=black,
+		%shorten >=2pt
+		},					
+    arrow/.style = { 
+    	draw,
+		thick,
+		->,
+		shorten >=2pt
+		},
+  ]
+  % Define nodes in a matrix
+%----------------------------------%----------------------------------%----------------------------------%----------------------------------%----------------------------------%----------------------------------%----------------------------------		
+  \matrix [column sep=25mm, row sep=15mm] {
+	\draw [thick,
+		color=black,
+		domain=0:2*pi,
+		samples=200,
+		smooth]
+  		plot (xy polar cs:angle=\x r, radius={1});	&
+									\draw [thick,
+										  color=black,
+										  domain=0:2*pi,
+										  samples=200,
+										  smooth]
+										  plot (xy polar cs:angle=\x r, radius={-1*sin(\x r)});
+									\draw [thick,
+										  color=black,
+										  domain=0:2*pi,
+  									  	  samples=200,
+										  smooth]
+	  									  plot (xy polar cs:angle=\x r, radius={1*sin(\x r)});		 &
+								   									  \draw [thick,
+																	  		color=black,
+																			domain=0:2*pi,
+																			samples=200,
+																			smooth]
+																			plot (xy polar cs:angle=\x r, radius={1*cos(\x r)});	
+																	  \draw [thick,
+																		  color=black,
+																		  domain=0:2*pi,
+																		  samples=200,
+																		  smooth]
+																		  plot (xy polar cs:angle=\x r, radius={-1*cos(\x r)}); & 			& 								   &								  &									\\
+	\node [mic] (w) {W}; 		   & \node [mic] (x) {X}; 			  & \node [mic] (y) {Y}; 	         & 									&								   &								  & 								\\
+								   &								  &	\node [control] (nodeY-y)	{} ; & \node [mic] (-y) {-Y};			&								   &								  &									\\
+	\node [control] (nodeWx) {};	   & \node [control] (nodeXy) {};	  & \node [control] (nodeYl) {};     & 									&								   & \node [control] (nodeL) {};	  & 								\\ 
+								   &								  &									 &									&								   & \node [mic] (l) {L};			  &									\\  
+	\node [control] (nodeWr) {};	   & \node [control] (nodeXr) {};	  &									 & \node [control] (node-Yr) {};	&								   & 								  &	\node [mic] (r) {R};			\\ 				
+								   &								  & \node [mic] (s) {S};		     &									& 								   & \node [control] (nodeS) {};	  & 								\\
+								   & 								  & 							     & \node [mic] (-s) {-S};			&						 		   & 								  & \node [control] (node-S) {};	\\
+	\node [control] (nodeWm) {};	   & \node [control] (nodeXm) {};	  & 								 &									& \node [mic] (m) {M};	 		   & \node [control] (nodeM) {};	  & \node [control] (nodeMr) {};	\\
+								   & 								  & 								 &									& \draw [thick,
+																																					color=black,
+																																					domain=0:2*pi,
+																																					samples=200,
+																																					smooth]
+																																					plot (xy polar cs:angle=\x r, radius={-.707+.707*sin(\x r)}); &		  & 								\\				
+  };
+  
+  \begin{scope} [every path/.style=line]
+  	\path (w) -- (nodeWx) -- (nodeL) -- (l);
+	\path (x) -- (nodeXm);
+	\path (y) -- (s) -- (nodeS);
+	\path (nodeY-y) -- (-y) -- (-s);
+	\path (nodeWx) -- (nodeWr) -- (r);
+	\path (nodeWx) -- (nodeWm) -- (m) -- (nodeMr) -- (r);
+	\path (-s) -- (node-S);
+	\path (nodeM) -- (l);
+%	\path (nodeWX) -- (nodeXY) -- (nodeYL) -- (nodeL);
+%	\path (nodeY) -- (-y);
+%	\path (nodeM) -- (nodeMr) -- (r);
+%	\path (x) -- (nodeX);
+%    \path (y) -- (s) -- (nodeS);
+%    \path (-y) -- (-s) -- (node-S);
+            
+  \end{scope}
+
+\end{tikzpicture}
+
+\end{document}
