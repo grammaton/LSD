@@ -8,7 +8,7 @@
 
 
 // Sense of space
-// Sensazione di spazialità o direzione attraverso le differenze di fase tra diffusori
+// Sensazione di spazialità o direzione attraverso le differenze di fase
 
 { var x; x = BrownNoise.ar(0.2); [x,x] }.scope(2); // correlated
 { {BrownNoise.ar(0.2)}.dup }.scope(2); // not correlated
@@ -54,20 +54,35 @@
 }.scope(2);
 )
 
-// amplitude panner for the 10 bottom ring speakers
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//----------------------------------------------------- AMPIEZZA MEZZA BELLEZZA -
+//----------------------------------------------------------------------- 10 CH -
+//-------------------------------------------------------------------------------
+
 s.boot;
 (
 {
     PanAz.ar(
-        10,                 // numChans
-        ClipNoise.ar,     // in
+        10,                                           // numChans
+        ClipNoise.ar,                                // in
         LFSaw.kr(MouseX.kr(0.1, 8, 'exponential')), // pos
-        0.2,            // level
-        3            // width
+        0.2,                                       // level
+        3                                         // width
     );
 }.play;
 s.scope(10);
 )
+
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//------------------------------------------------------------ AMBISONIC PANNER -
+//----------------------------------------------------------------------- I ORD -
+//-------------------------------------------------------------------------------
 
 // PanB2 and DecodeB2 - 2D ambisonics panner and decoder
 (
@@ -77,7 +92,12 @@ s.scope(10);
 	p = BrownNoise.ar; // source
 
 	// B-format encode
-	#w, x, y = PanB2.ar(p, MouseX.kr(-1,1), 0.3);
+	#w, x, y = PanB2.ar(p,
+    //MouseX.kr(-1,1),
+    LFSaw.kr(MouseX.kr(0.1, 8, 'exponential')),
+    0.3
+
+  );
 
 	// B-format decode to quad. outputs in clockwise order
 	// #lf, rf, rr, lr = DecodeB2.ar(4, w, x, y);
@@ -87,20 +107,27 @@ s.scope(10);
 }.scope(4);
 )
 
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------
+//----------------------------------------------------------- APPUNTI SULL'ARNO -
+//-------------------------------------------------------------------------------
 
+// one full cycle for PanAz: from 0 to 1
+{ PanAz.ar(2, DC.ar(1), Line.ar(0, 1, 0.1)) }.plot(0.1)
 
+// one full cycle for Pan2: from -1 to 1 and back to -1
+{ Pan2.ar(DC.ar(1), EnvGen.kr(Env([-1, 1, -1], [0.05, 0.05]))) }.plot(0.1)
 
+// in other words, while Pan2 makes one full transition
+{ Pan2.ar(DC.ar(1), Line.ar(-1, 1, 0.1)) }.plot(0.1)
 
+// we need only a half one in PanAz:
+{ PanAz.ar(2, DC.ar(1), Line.ar(0, 1/2, 0.1)) }.plot(0.1)
 
-
-{
-	Pan2.ar(
-		SinOsc.ar(440),
-//		Line.kr(-1,1,5)
-//		pos: -1
-//		pos: 0
-		pos: 1
-)}.play
+//
 
 (
 var window;
@@ -116,15 +143,3 @@ k.action_({|v,x,y,m| \pan.asSpec.map(v.value).postln; })
 k.centered
 k.centered = true
 k.centered = false
-
-// one full cycle for PanAz: from 0 to 1
-{ PanAz.ar(2, DC.ar(1), Line.ar(0, 1, 0.1)) }.plot(0.1)
-
-// one full cycle for Pan2: from -1 to 1 and back to -1
-{ Pan2.ar(DC.ar(1), EnvGen.kr(Env([-1, 1, -1], [0.05, 0.05]))) }.plot(0.1)
-
-// in other words, while Pan2 makes one full transition
-{ Pan2.ar(DC.ar(1), Line.ar(-1, 1, 0.1)) }.plot(0.1)
-
-// we need only a half one in PanAz:
-{ PanAz.ar(2, DC.ar(1), Line.ar(0, 1/2, 0.1)) }.plot(0.1)
