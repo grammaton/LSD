@@ -27,6 +27,10 @@ Preferirei che fosse usato da Terminale ma se proprio avete bisogno di interfacc
  - [Stereo](https://en.wikipedia.org/wiki/Stereophonic_sound)
  - [Amplitude](https://en.wikipedia.org/wiki/Amplitude)
 
+### Calcolo assorbimento aria
+
+ - [sengpiel](http://www.sengpielaudio.com/calculator-air.htm)
+
 ----
 
 [![Join the chat at https://gitter.im/grammaton/LSD](https://badges.gitter.im/grammaton/LSD.svg)](https://gitter.im/grammaton/LSD?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
