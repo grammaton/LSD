@@ -1,0 +1,391 @@
+#N canvas 0 23 2560 1391 10;
+#X msg 1743 988 \; pd dsp 1;
+#X msg 1743 1023 \; pd dsp 0;
+#X obj 1216 309 c.gain~ @size 131 10 @fontname "Helvetica" @fontweight
+"normal" @fontslant "roman" @fontsize 11 @receive "(null)" @send "(null)"
+@presetname "(null)" @mode 0 @ramp 20 @bgcolor 0.75 0.75 0.75 1 @bdcolor
+0.5 0.5 0.5 1 @kncolor 0.5 0.5 0.5 1;
+#X obj 1673 194 hoa.connect;
+#X obj 1673 174 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 717 173 c.patcherinfos;
+#X obj 717 156 loadbang;
+#X obj 717 156 hoa.help.header;
+#X obj 1133 156 hoa.help.also;
+#X obj 1612 987 c.meter~ @size 13 85 @fontname "Helvetica" @fontweight
+"normal" @fontslant "roman" @fontsize 11 @receive "(null)" @send "(null)"
+@interval 50 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor
+0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8;
+#X obj 1346 351 hoa.pi~ 2;
+#X obj 1477 351 hoa.pi~ 0.5;
+#X obj 1477 326 hoa.tri~ 0.05;
+#X obj 1216 266 hoa.soundrone;
+#X text 722 200 hoa.3d.encoder~ decodes an ambisonic sound field for
+several loudspeakers configurations or for headphones.;
+#X obj 1634 1083 hoa.dac~ 1:2 -------------------------------;
+#X obj 1895 977 c.meter~ @size 13 85 @fontname "Helvetica" @fontweight
+"normal" @fontslant "roman" @fontsize 11 @receive "(null)" @send "(null)"
+@interval 50 @bgcolor 0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @coldcolor
+0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor 0.85 0.85 0 0.8 @hotcolor
+1 0.6 0 0.8 @overcolor 1 0 0 0.8;
+#X obj 1347 329 phasor~ 0.3;
+#X text 725 258 1st argument is the order.;
+#X text 724 273 2nd argument is the decoding mode : ambisonic or 0
+\, binaural or 1 (for headphones).;
+#X text 1195 205 Important : Unlike the GUI \, the argument are not
+saved with the object. You have to write it in the box or to send a
+message.;
+#X obj 742 944 hoa.3d.meter~ @size 261 261 @fontname "Helvetica" @fontweight
+"normal" @fontslant "roman" @fontsize 11 @receive "(null)" @send "(null)"
+@channels 22 @angles 0 0 324 0 288 0 252 0 216 0 180 0 144 0 108 0
+72 0 36 0 0 36 320 36 280 36 240 36 200 36 160 36 120 36 80 36 40 36
+0 72 240 72 120 72 @offset 0 0 0 @rotation "anti-clockwise" @view "top"
+@vectors "none" @interval 50 @bgcolor 0.76 0.76 0.76 1 @bdcolor 0.7
+0.7 0.7 1 @coldcolor 0 0.6 0 0.8 @tepidcolor 0.6 0.73 0 0.8 @warmcolor
+0.85 0.85 0 0.8 @hotcolor 1 0.6 0 0.8 @overcolor 1 0 0 0.8 @energycolor
+0 0 1 0.8 @velocitycolor 1 0 0 0.8;
+#X text 721 360 Ambisonic decoding is used for a set loudspeakers spread
+over a sphere.;
+#X text 720 413 (Rotation around;
+#X text 720 423 xyz axes);
+#X msg 635 851 offset \$1 \$2 \$3;
+#X msg 635 798 0 0 0;
+#X msg 655 820 60 0 180;
+#X obj 1170 1285 hoa.help.pub;
+#X text 725 304 3rd argument is the number of channels.;
+#X text 723 398 Offset of the loudspeakers in degrees;
+#X text 1079 934 channels;
+#X text 1079 924 Angles of;
+#X obj 1073 905 c.loadmess;
+#X msg 1940 830 crop \$1;
+#X obj 1940 803 c.number @size 53 17 @fontname "Helvetica" @fontweight
+"normal" @fontslant "roman" @fontsize 11 @receive "(null)" @send "(null)"
+@presetname "(null)" @min 0 @max 512 @minmax 0 512 @decimal 0 @bgcolor
+0.75 0.75 0.75 1 @bdcolor 0.5 0.5 0.5 1 @textcolor 0 0 0 1;
+#X text 1906 755 Binaural mode is used for headphones. If the process
+cost too much CPU \, you can crop the responses (the max length is
+512 samples).;
+#X obj 742 866 hoa.3d.optim~ 7 inPhase -------------------;
+#X obj 742 899 hoa.3d.decoder~ 7 regular 22 ------------, f 43;
+#X msg 1073 956 angles 0 0 -36 0 -72 0 -108 0 -144 0 180 0 144 0 108
+0 72 0 36 0 0 36 -40 36 -80 36 -120 36 -160 36 160 36 120 36 80 36
+40 36 0 72 -120 72 120 72, f 65;
+#X obj 1210 589 hoa.3d.scope~ @size 271 271 @fontname "Helvetica" @fontweight
+"normal" @fontslant "roman" @fontsize 11 @receive "(null)" @send "(null)"
+@order 7 @view 0 0 0 @gain 1 @interval 100 @bgcolor 0.76 0.76 0.76
+1 @bdcolor 0.7 0.7 0.7 1 @phcolor 1 0 0 1 @nhcolor 0 0 1 1;
+#X obj 1216 378 hoa.3d.encoder~ 7 --------------------------;
+#X text 1074 1071 LSD: non è il nostro caso! sarà meno definito Important:
+To avoid artefacts \, you should prefer to discretize perfectly the
+sphere with the 5 platonic solids (tetrahedron (4 channels) \, octahedron
+(6 channels) \, cube (8 channels) \, icosahedron (12) \, dodecahedron
+(20 channels)). Of course \, a perfect sphere of loudspeakers is rare
+and you would certainly have an irregular discretization. For the moment
+we don't offset this case automatically \, thus you have to try several
+decomposition orders with "inPhase" optimization to find the best rendering.
+;
+#X obj 1634 928 hoa.3d.decoder~ 7 binaural -----------------;
+#X text 1265 874 LSD: cosa esce dal file;
+#X text 1073 1006 LSD: le coordinate sono azimuth + elevation esempio:
+-36 0 ha az -36 e el 0 ricorda: il senso è antiorario;
+#X connect 2 0 41 0;
+#X connect 4 0 3 0;
+#X connect 5 0 7 0;
+#X connect 6 0 5 0;
+#X connect 10 0 41 1;
+#X connect 11 0 41 2;
+#X connect 12 0 11 1;
+#X connect 13 0 2 0;
+#X connect 17 0 10 1;
+#X connect 25 0 21 0;
+#X connect 25 0 38 0;
+#X connect 26 0 25 0;
+#X connect 27 0 25 0;
+#X connect 33 0 39 0;
+#X connect 34 0 43 0;
+#X connect 35 0 34 0;
+#X connect 37 0 38 0;
+#X connect 37 1 38 1;
+#X connect 37 2 38 2;
+#X connect 37 3 38 3;
+#X connect 37 4 38 4;
+#X connect 37 5 38 5;
+#X connect 37 6 38 6;
+#X connect 37 7 38 7;
+#X connect 37 8 38 8;
+#X connect 37 9 38 9;
+#X connect 37 10 38 10;
+#X connect 37 11 38 11;
+#X connect 37 12 38 12;
+#X connect 37 13 38 13;
+#X connect 37 14 38 14;
+#X connect 37 15 38 15;
+#X connect 37 16 38 16;
+#X connect 37 17 38 17;
+#X connect 37 18 38 18;
+#X connect 37 19 38 19;
+#X connect 37 20 38 20;
+#X connect 37 21 38 21;
+#X connect 37 22 38 22;
+#X connect 37 23 38 23;
+#X connect 37 24 38 24;
+#X connect 37 25 38 25;
+#X connect 37 26 38 26;
+#X connect 37 27 38 27;
+#X connect 37 28 38 28;
+#X connect 37 29 38 29;
+#X connect 37 30 38 30;
+#X connect 37 31 38 31;
+#X connect 37 32 38 32;
+#X connect 37 33 38 33;
+#X connect 37 34 38 34;
+#X connect 37 35 38 35;
+#X connect 37 36 38 36;
+#X connect 37 37 38 37;
+#X connect 37 38 38 38;
+#X connect 37 39 38 39;
+#X connect 37 40 38 40;
+#X connect 37 41 38 41;
+#X connect 37 42 38 42;
+#X connect 37 43 38 43;
+#X connect 37 44 38 44;
+#X connect 37 45 38 45;
+#X connect 37 46 38 46;
+#X connect 37 47 38 47;
+#X connect 37 48 38 48;
+#X connect 37 49 38 49;
+#X connect 37 50 38 50;
+#X connect 37 51 38 51;
+#X connect 37 52 38 52;
+#X connect 37 53 38 53;
+#X connect 37 54 38 54;
+#X connect 37 55 38 55;
+#X connect 37 56 38 56;
+#X connect 37 57 38 57;
+#X connect 37 58 38 58;
+#X connect 37 59 38 59;
+#X connect 37 60 38 60;
+#X connect 37 61 38 61;
+#X connect 37 62 38 62;
+#X connect 37 63 38 63;
+#X connect 38 0 21 0;
+#X connect 38 1 21 1;
+#X connect 38 2 21 2;
+#X connect 38 3 21 3;
+#X connect 38 4 21 4;
+#X connect 38 5 21 5;
+#X connect 38 6 21 6;
+#X connect 38 7 21 7;
+#X connect 38 8 21 8;
+#X connect 38 9 21 9;
+#X connect 38 10 21 10;
+#X connect 38 11 21 11;
+#X connect 38 12 21 12;
+#X connect 38 13 21 13;
+#X connect 38 14 21 14;
+#X connect 38 15 21 15;
+#X connect 38 16 21 16;
+#X connect 38 17 21 17;
+#X connect 38 18 21 18;
+#X connect 38 19 21 19;
+#X connect 38 20 21 20;
+#X connect 38 21 21 21;
+#X connect 39 0 21 18;
+#X connect 39 0 38 15;
+#X connect 41 0 40 0;
+#X connect 41 0 37 0;
+#X connect 41 0 43 0;
+#X connect 41 1 40 1;
+#X connect 41 1 37 1;
+#X connect 41 1 43 1;
+#X connect 41 2 40 2;
+#X connect 41 2 37 2;
+#X connect 41 2 43 2;
+#X connect 41 3 40 3;
+#X connect 41 3 37 3;
+#X connect 41 3 43 3;
+#X connect 41 4 40 4;
+#X connect 41 4 37 4;
+#X connect 41 4 43 4;
+#X connect 41 5 40 5;
+#X connect 41 5 37 5;
+#X connect 41 5 43 5;
+#X connect 41 6 40 6;
+#X connect 41 6 37 6;
+#X connect 41 6 43 6;
+#X connect 41 7 40 7;
+#X connect 41 7 37 7;
+#X connect 41 7 43 7;
+#X connect 41 8 40 8;
+#X connect 41 8 37 8;
+#X connect 41 8 43 8;
+#X connect 41 9 40 9;
+#X connect 41 9 37 9;
+#X connect 41 9 43 9;
+#X connect 41 10 40 10;
+#X connect 41 10 37 10;
+#X connect 41 10 43 10;
+#X connect 41 11 40 11;
+#X connect 41 11 37 11;
+#X connect 41 11 43 11;
+#X connect 41 12 40 12;
+#X connect 41 12 37 12;
+#X connect 41 12 43 12;
+#X connect 41 13 40 13;
+#X connect 41 13 37 13;
+#X connect 41 13 43 13;
+#X connect 41 14 40 14;
+#X connect 41 14 37 14;
+#X connect 41 14 43 14;
+#X connect 41 15 40 15;
+#X connect 41 15 37 15;
+#X connect 41 15 43 15;
+#X connect 41 16 40 16;
+#X connect 41 16 37 16;
+#X connect 41 16 43 16;
+#X connect 41 17 40 17;
+#X connect 41 17 37 17;
+#X connect 41 17 43 17;
+#X connect 41 18 40 18;
+#X connect 41 18 37 18;
+#X connect 41 18 43 18;
+#X connect 41 19 40 19;
+#X connect 41 19 37 19;
+#X connect 41 19 43 19;
+#X connect 41 20 40 20;
+#X connect 41 20 37 20;
+#X connect 41 20 43 20;
+#X connect 41 21 40 21;
+#X connect 41 21 37 21;
+#X connect 41 21 43 21;
+#X connect 41 22 40 22;
+#X connect 41 22 37 22;
+#X connect 41 22 43 22;
+#X connect 41 23 40 23;
+#X connect 41 23 37 23;
+#X connect 41 23 43 23;
+#X connect 41 24 40 24;
+#X connect 41 24 37 24;
+#X connect 41 24 43 24;
+#X connect 41 25 40 25;
+#X connect 41 25 37 25;
+#X connect 41 25 43 25;
+#X connect 41 26 40 26;
+#X connect 41 26 37 26;
+#X connect 41 26 43 26;
+#X connect 41 27 40 27;
+#X connect 41 27 37 27;
+#X connect 41 27 43 27;
+#X connect 41 28 40 28;
+#X connect 41 28 37 28;
+#X connect 41 28 43 28;
+#X connect 41 29 40 29;
+#X connect 41 29 37 29;
+#X connect 41 29 43 29;
+#X connect 41 30 40 30;
+#X connect 41 30 37 30;
+#X connect 41 30 43 30;
+#X connect 41 31 40 31;
+#X connect 41 31 37 31;
+#X connect 41 31 43 31;
+#X connect 41 32 40 32;
+#X connect 41 32 37 32;
+#X connect 41 32 43 32;
+#X connect 41 33 40 33;
+#X connect 41 33 37 33;
+#X connect 41 33 43 33;
+#X connect 41 34 40 34;
+#X connect 41 34 37 34;
+#X connect 41 34 43 34;
+#X connect 41 35 40 35;
+#X connect 41 35 37 35;
+#X connect 41 35 43 35;
+#X connect 41 36 40 36;
+#X connect 41 36 37 36;
+#X connect 41 36 43 36;
+#X connect 41 37 40 37;
+#X connect 41 37 37 37;
+#X connect 41 37 43 37;
+#X connect 41 38 40 38;
+#X connect 41 38 37 38;
+#X connect 41 38 43 38;
+#X connect 41 39 40 39;
+#X connect 41 39 37 39;
+#X connect 41 39 43 39;
+#X connect 41 40 40 40;
+#X connect 41 40 37 40;
+#X connect 41 40 43 40;
+#X connect 41 41 40 41;
+#X connect 41 41 37 41;
+#X connect 41 41 43 41;
+#X connect 41 42 40 42;
+#X connect 41 42 37 42;
+#X connect 41 42 43 42;
+#X connect 41 43 40 43;
+#X connect 41 43 37 43;
+#X connect 41 43 43 43;
+#X connect 41 44 40 44;
+#X connect 41 44 37 44;
+#X connect 41 44 43 44;
+#X connect 41 45 40 45;
+#X connect 41 45 37 45;
+#X connect 41 45 43 45;
+#X connect 41 46 40 46;
+#X connect 41 46 37 46;
+#X connect 41 46 43 46;
+#X connect 41 47 40 47;
+#X connect 41 47 37 47;
+#X connect 41 47 43 47;
+#X connect 41 48 40 48;
+#X connect 41 48 37 48;
+#X connect 41 48 43 48;
+#X connect 41 49 40 49;
+#X connect 41 49 37 49;
+#X connect 41 49 43 49;
+#X connect 41 50 40 50;
+#X connect 41 50 37 50;
+#X connect 41 50 43 50;
+#X connect 41 51 40 51;
+#X connect 41 51 37 51;
+#X connect 41 51 43 51;
+#X connect 41 52 40 52;
+#X connect 41 52 37 52;
+#X connect 41 52 43 52;
+#X connect 41 53 40 53;
+#X connect 41 53 37 53;
+#X connect 41 53 43 53;
+#X connect 41 54 40 54;
+#X connect 41 54 37 54;
+#X connect 41 54 43 54;
+#X connect 41 55 40 55;
+#X connect 41 55 37 55;
+#X connect 41 55 43 55;
+#X connect 41 56 40 56;
+#X connect 41 56 37 56;
+#X connect 41 56 43 56;
+#X connect 41 57 40 57;
+#X connect 41 57 37 57;
+#X connect 41 57 43 57;
+#X connect 41 58 40 58;
+#X connect 41 58 37 58;
+#X connect 41 58 43 58;
+#X connect 41 59 40 59;
+#X connect 41 59 37 59;
+#X connect 41 59 43 59;
+#X connect 41 60 40 60;
+#X connect 41 60 37 60;
+#X connect 41 60 43 60;
+#X connect 41 61 40 61;
+#X connect 41 61 37 61;
+#X connect 41 61 43 61;
+#X connect 41 62 40 62;
+#X connect 41 62 37 62;
+#X connect 41 62 43 62;
+#X connect 41 63 40 63;
+#X connect 41 63 37 63;
+#X connect 41 63 43 63;
+#X connect 43 0 15 0;
+#X connect 43 0 9 0;
+#X connect 43 1 16 0;
+#X connect 43 1 15 1;
